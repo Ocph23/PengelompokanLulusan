@@ -1,0 +1,116 @@
+﻿<Window x:Class="MainApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainApp" WindowStyle="None"
+         xmlns:fa="clr-namespace:FontAwesome.WPF;assembly=FontAwesome.WPF"
+        WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        mc:Ignorable="d" FontSize="15" Foreground="White"
+        Title="MainWindow" Height="800" Width="1280">
+
+    <Grid Style="{DynamicResource gridBase}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="79*" />
+            <RowDefinition Height="652*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource header}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+
+            <WrapPanel Grid.Column="0">
+                <Image Source="images/ustj.png"  Width="60" Height="40"/>
+                <Label Style="{StaticResource headerTitle}" Content="K-Means App" ></Label>
+            </WrapPanel>
+            <WrapPanel VerticalAlignment="Center"  Grid.Column="1" Margin="0,0,30,0"  >
+                <Button Click="btnMinimize" VerticalContentAlignment="Center" Style="{StaticResource windowBtn}" Content="-"></Button>
+                <Button Click="btnClose" Style="{StaticResource windowBtn}" Content="X" Foreground="#D25151"></Button>
+            </WrapPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Style="{DynamicResource leftSide}">
+                <StackPanel.Effect>
+                    <DropShadowEffect BlurRadius="5" Direction="-90"
+                                      RenderingBias="Quality" ShadowDepth="3"/>
+                </StackPanel.Effect>
+                <Menu >
+                    <MenuItem Height="100" Command="{Binding GoPageCommand}" CommandParameter="home"  >
+                        <MenuItem.Header>
+                            <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                <fa:ImageAwesome  Width="30" Icon="Home" VerticalAlignment="Center" 
+                                                Foreground="White" HorizontalAlignment="Center" />
+                                <Label   HorizontalAlignment="Center" Content="Home"></Label>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Height="100" Template="{StaticResource menuItem}" >
+                        <MenuItem.Header>
+                            <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                <fa:ImageAwesome Width="30" Icon="Server" VerticalAlignment="Center" 
+                                                Foreground="White" HorizontalAlignment="Center" />
+                                <Label HorizontalContentAlignment="Center" Content="Master"></Label>
+                            </StackPanel>
+                        </MenuItem.Header>
+                        <MenuItem Template="{StaticResource menuItem}" Command="{Binding GoPageCommand}" CommandParameter="master-fakultas" >
+                            <MenuItem.Header>
+                                <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                    <Label HorizontalAlignment="Center" Content="Fakultas &amp; Prodi"></Label>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+
+                        <MenuItem Template="{StaticResource menuItem}"  Command="{Binding GoPageCommand}" CommandParameter="master-jurusan">
+                            <MenuItem.Header>
+                                <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                    <Label HorizontalAlignment="Center" Content="Jurusan"></Label>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </MenuItem>
+                    <MenuItem Height="100" Template="{StaticResource menuItem}" Command="{Binding GoPageCommand}" CommandParameter="mahasiswa">
+                        <MenuItem.Header>
+                            <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                <fa:ImageAwesome Width="30" Icon="Database" VerticalAlignment="Center" 
+                                                Foreground="White" HorizontalAlignment="Center" />
+                                <Label HorizontalAlignment="Center" Content="Mahasiswa"></Label>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Height="100" Template="{StaticResource menuItem}" Command="{Binding GoPageCommand}" CommandParameter="analisa">
+                        <MenuItem.Header>
+                            <StackPanel  Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                <fa:ImageAwesome Width="30" Icon="Magic" VerticalAlignment="Center" 
+                                                Foreground="White" HorizontalAlignment="Center" />
+                                <Label HorizontalAlignment="Center" Content="Analisa"></Label>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem Height="100" Template="{StaticResource menuItem}" Command="{Binding GoPageCommand}" CommandParameter="logout">
+                        <MenuItem.Header>
+                            <StackPanel  Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                <fa:ImageAwesome Width="30" Icon="SignOut" VerticalAlignment="Center" 
+                                                Foreground="White" HorizontalAlignment="Center" />
+                                <Label HorizontalAlignment="Center" Content="Logout"></Label>
+                            </StackPanel>
+                        </MenuItem.Header>
+                    </MenuItem>
+                </Menu>
+
+            </StackPanel>
+            <Frame Grid.Column="1" x:Name="_mainFrame" NavigationUIVisibility="Hidden" />
+        </Grid>
+        <StackPanel Grid.Row="2" Grid.Column="0" >
+            <Label FontSize="15" Height="auto" Content="@TCharlos -2019"  HorizontalAlignment="Left" Margin="10"></Label>
+        </StackPanel>
+    </Grid>
+
+
+
+</Window>

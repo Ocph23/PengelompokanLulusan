@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29020.237
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kmeans", "Kmeans\Kmeans.csproj", "{330FEB59-18BC-46F9-81C0-33DFFC6D2E0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MainApp", "MainApp\MainApp.csproj", "{FE77A55C-DD37-428F-8A4D-3ADF47625468}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{330FEB59-18BC-46F9-81C0-33DFFC6D2E0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{330FEB59-18BC-46F9-81C0-33DFFC6D2E0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{330FEB59-18BC-46F9-81C0-33DFFC6D2E0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{330FEB59-18BC-46F9-81C0-33DFFC6D2E0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE77A55C-DD37-428F-8A4D-3ADF47625468}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE77A55C-DD37-428F-8A4D-3ADF47625468}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE77A55C-DD37-428F-8A4D-3ADF47625468}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE77A55C-DD37-428F-8A4D-3ADF47625468}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F5B530D7-A1FA-4CA0-B57D-9F3537BC9A02}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,117 @@
+﻿<Page x:Class="MainApp.Views.Pages.KMeanAnalisView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:MainApp.Views.Pages"
+      xmlns:fa="http://schemas.fontawesome.io/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="KMeanAnalisView">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <WrapPanel Margin="0,0,0,30">
+            <fa:ImageAwesome Width="20" Icon="Backward" VerticalAlignment="Center" 
+                                                Foreground="White" HorizontalAlignment="Center">
+                <fa:ImageAwesome.InputBindings>
+                    <MouseBinding Gesture="LeftClick" Command="{Binding BackCommand, Mode=OneTime}" />
+                </fa:ImageAwesome.InputBindings>
+            </fa:ImageAwesome>
+            <Label Content="Kembali"/>
+        </WrapPanel>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20*"/>
+                <ColumnDefinition Width="80*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel>
+                <Label Content="DATA ANALISIS"/>
+                <WrapPanel>
+                    <Label MinWidth="180" Style="{StaticResource formLabel}" Content="Jumlah Data"></Label>
+                    <TextBox Text="{Binding JumlahData}" MinWidth="50" HorizontalContentAlignment="Center" IsEnabled="False"  />
+                </WrapPanel>
+                <WrapPanel>
+                    <Label  MinWidth="180" Style="{StaticResource formLabel}" Content="Jumlah Cluster"></Label>
+                    <TextBox Text="{Binding JumlahCluster}" MinWidth="50"  HorizontalContentAlignment="Center" />
+                </WrapPanel>
+                <WrapPanel>
+                    <Label  MinWidth="180" Style="{StaticResource formLabel}" Content="Jumlah Centroid Awal"></Label>
+                    <TextBox Text="{Binding JumlahCentroid}" MinWidth="50" HorizontalContentAlignment="Center" IsEnabled="False"  />
+                </WrapPanel>
+                <Button Command="{Binding AnalisaCommand}" Height="60" Margin="0,30" Style="{StaticResource btnOK}" Content="Analisa K-Means"></Button>
+                <StackPanel>
+                    <Button ToolTip="Pengelompokan" Command="{Binding PrintGrafikCommand}" Width="60" Margin="5" Style="{StaticResource btnInfo}" >
+                        <fa:ImageAwesome Icon="ObjectGroup" Width="50" Foreground="White" >
+                            <fa:ImageAwesome.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintPengelompokanCommand}" />
+                            </fa:ImageAwesome.InputBindings>
+                        </fa:ImageAwesome>
+                    </Button>
+                    <Button ToolTip="Grafik" Command="{Binding PrintGrafikCommand}" Width="60" Margin="5" Style="{StaticResource btnWarning}" >
+                        <fa:ImageAwesome Icon="BarChart" Width="50" Foreground="White">
+                            <fa:ImageAwesome.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintGrafikCommand}" />
+                            </fa:ImageAwesome.InputBindings>
+                        </fa:ImageAwesome>
+                    </Button>
+                    <Button ToolTip="Statistik" Command="{Binding PrintStatisticCommand}" Width="60" Margin="5" Style="{StaticResource btnEclamation}" >
+                        <fa:ImageAwesome Icon="LineChart" Width="50" Foreground="White">
+                            <fa:ImageAwesome.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintStatisticCommand}" />
+                            </fa:ImageAwesome.InputBindings>
+                        </fa:ImageAwesome>
+                    </Button>
+                    <Button ToolTip="Rekomendasi" Command="{Binding PrintRekomendasiCommand}"  Width="60" Margin="5" Style="{StaticResource btnRecomendation}" >
+                        <fa:ImageAwesome Icon="SortNumericDesc" Width="50" Foreground="White">
+                            <fa:ImageAwesome.InputBindings>
+                                <MouseBinding Gesture="LeftClick" Command="{Binding PrintRekomendasiCommand}" />
+                            </fa:ImageAwesome.InputBindings>
+                        </fa:ImageAwesome>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+            <DataGrid Grid.Column="1" ItemsSource="{Binding Source}" SelectedItem="{Binding SelectedItem}" Margin="30,5,30,30" Grid.Row="1" Background="{x:Null}" 
+                      AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                      RowStyle="{StaticResource dataGridRowStyle1}"
+                      ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}"
+                      CellStyle="{DynamicResource DataGridCellStyle1}">
+                <DataGrid.Columns>
+                    <DataGridCheckBoxColumn Width="auto" Header="" Binding="{Binding IsCentroid, UpdateSourceTrigger=PropertyChanged}"/>
+                    <DataGridTextColumn Width="auto" Header="No" Binding="{Binding Nomor}"/>
+                    <DataGridTextColumn Width="*" Header="Nama Mahasiswa" Binding="{Binding Nama}"/>
+                    <DataGridTextColumn Width="auto" Header="NPM" Binding="{Binding NPM}"/>
+                    <DataGridTextColumn Width="auto" Header="Suku" Binding="{Binding SukuModel.Nama}"/>
+                    <DataGridTextColumn Width="auto" Header="IPK" Binding="{Binding IPKText}"/>
+                    <DataGridTextColumn Width="auto" Header="Test" Binding="{Binding HasilTestText}"/>
+                    <DataGridTextColumn Width="auto" Header="Gel" Binding="{Binding Gelombang}"/>
+                    <DataGridTextColumn Width="auto" Header="Jurusan" Binding="{Binding Jurusan.Name}"/>
+                    <DataGridTextColumn Width="auto" Header="L.Studi" Binding="{Binding MasaStudiText}"/>
+                    <DataGridTextColumn  Header="Cluster" Binding="{Binding Clustering}"/>
+                </DataGrid.Columns>
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Command="{Binding EditCommand}" Template="{StaticResource menuItem}">
+                            <MenuItem.Header>
+                                <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                    <Label HorizontalAlignment="Center" Content="Ubah"></Label>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                        <MenuItem Command="{Binding DeleteCommand}" Template="{StaticResource menuItem}">
+                            <MenuItem.Header>
+                                <StackPanel Width="{Binding LeftSideWidth}" HorizontalAlignment="Center">
+                                    <Label HorizontalAlignment="Center" Content="Hapus"></Label>
+                                </StackPanel>
+                            </MenuItem.Header>
+                        </MenuItem>
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

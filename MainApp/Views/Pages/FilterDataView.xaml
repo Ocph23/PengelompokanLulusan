@@ -1,0 +1,69 @@
+﻿<Window x:Class="MainApp.Views.Pages.FilterDataView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MainApp.Views.Pages"
+        xmlns:wpfTool="http://schemas.xceed.com/wpf/xaml/toolkit"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        mc:Ignorable="d"
+        Title="TambahProgdiView" Height="441" Width="400">
+    <Grid Style="{DynamicResource gridBase}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource header}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Grid.Column="0">
+                <Label FontSize="17" Style="{StaticResource  menuHeader}" Content="{Binding MyTitle}" ></Label>
+            </WrapPanel>
+            <WrapPanel VerticalAlignment="Center"  Grid.Column="1" Margin="0,0,30,0"  >
+                <Button Command="{Binding CancelCommand}" Style="{StaticResource windowBtn}" Content="X" Foreground="#D25151"></Button>
+            </WrapPanel>
+        </Grid>
+        <Grid Grid.Row="1" Background="#FF464C63">
+            <Border  Height="auto" Margin="15"  CornerRadius="10">
+                <Border.Background>
+                    <SolidColorBrush Opacity="0.4" Color="#7C7F84"></SolidColorBrush>
+                </Border.Background>
+                <StackPanel Margin="10" >
+                    <StackPanel Style="{StaticResource formItem}">
+                        <Label Style="{StaticResource formLabel}" Content="Fakultas"></Label>
+                        <ComboBox  ItemsSource="{Binding Fakultases}" DisplayMemberPath="Name" SelectedItem="{Binding SelectedFakultas,UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, 
+                            NotifyOnValidationError=True}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource formItem}">
+                        <Label Style="{StaticResource formLabel}" Content="Program Studi"></Label>
+                        <ComboBox  ItemsSource="{Binding SelectedFakultas.Children}" DisplayMemberPath="Name" SelectedValuePath="Id" 
+                                   SelectedValue="{Binding ProgdiId}">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Style="{StaticResource formItem}">
+                        <CheckBox Style="{StaticResource  baseStyle}" IsChecked="{Binding IncludeAngkatan}" Content="Angkatan"></CheckBox>
+                        <wpfTool:RangeSlider Margin="10" IsEnabled="{Binding IncludeAngkatan }" LowerValueChanged="rangeSlider_LowerValueChanged" HigherValueChanged="rangeSlider_HigherValueChanged"
+                                             Name="rangeSlider"  LowerValue="{Binding AngkatanMinimum}"  HigherValue="{Binding AngkatanMaximum}" 
+                                             Minimum="{Binding SliderMinimum}" Maximum="{Binding SliderMaximum}" Height="15">
+                        </wpfTool:RangeSlider>
+                        <WrapPanel HorizontalAlignment="Center">
+                            <Label Content="{Binding AngkatanMinimum}"></Label>
+                            <Label Content="-"></Label>
+                            <Label Content="{Binding AngkatanMaximum}"></Label>
+                        </WrapPanel>
+                    </StackPanel>
+                   
+                    <WrapPanel HorizontalAlignment="Right" Margin="0,20">
+                        <Button Command="{Binding CancelCommand}" Content="Batal" Style="{StaticResource btnCancel}"/>
+                        <Button Command="{Binding SaveCommand}" Content="Analisa" Style="{StaticResource btnOK}"/>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
