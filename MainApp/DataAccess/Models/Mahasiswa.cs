@@ -213,14 +213,14 @@ namespace MainApp.DataAccess.Models
         {
             get
             {
-                if (!string.IsNullOrEmpty(NPM) && NPM.Length>=4)
+                if (!string.IsNullOrEmpty(NPM) && NPM.Length>=2)
                 {
-                    return NPM.Substring(0,4);
+                    return $"20{NPM.Substring(0,2)}";
                 }
                 return string.Empty;
             }
         }
 
-        public int FakultasId { get; internal set; }
+        public int FakultasId { get;  set; }
     }
 }

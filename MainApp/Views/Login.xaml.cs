@@ -1,4 +1,5 @@
 ﻿using MainApp.DataAccess.Models;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -83,6 +84,7 @@ namespace MainApp.Views
             }
             catch (Exception ex)
             {
+              //  Crashes.TrackError(ex);
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }

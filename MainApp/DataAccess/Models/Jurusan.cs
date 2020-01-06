@@ -24,12 +24,12 @@ namespace MainApp.DataAccess.Models
             set { idJurusan = value; }
         }
 
-        [DbColumn("ProgdiId")]
+       /* [DbColumn("ProgdiId")]
         public int ParentId
         {
             get { return progdiId; }
             set { SetProperty(ref progdiId, value); }
-        }
+        }*/
 
 
         [DbColumn("namaJurusan")]

@@ -59,8 +59,9 @@ namespace MainApp.DataAccess
             }
             catch (Exception ex)
             {
-
+               
                 throw ex;
+
             }
         }
 

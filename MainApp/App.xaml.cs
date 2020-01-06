@@ -1,12 +1,6 @@
 ﻿using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -21,7 +15,7 @@ namespace MainApp
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            AppCenter.Start("2e8a3ed0-d208-45b0-b52c-81adb038310c",
+           AppCenter.Start("2e8a3ed0-d208-45b0-b52c-81adb038310c",
                                typeof(Analytics), typeof(Crashes));
             // Select the text in a TextBox when it receives focus.
             EventManager.RegisterClassHandler(typeof(TextBox), TextBox.PreviewMouseLeftButtonDownEvent,
