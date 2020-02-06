@@ -351,11 +351,13 @@
     <EmbeddedResource Include="Reports\PengelompokanLayout.rdlc" />
     <EmbeddedResource Include="Reports\RekomendasiLayout.rdlc" />
     <EmbeddedResource Include="Reports\StatistikLayout.rdlc" />
+    <EmbeddedResource Include="Reports\StatistikReportLayout.rdlc" />
     <None Include="packages.config" />
     <None Include="Properties\DataSources\MainApp.DataAccess.Models.Mahasiswa.datasource" />
     <None Include="Properties\DataSources\MainApp.Reports.GrafikModel.datasource" />
     <None Include="Properties\DataSources\MainApp.Reports.ReportModel.datasource" />
     <None Include="Properties\DataSources\MainApp.Reports.StatistikModel.datasource" />
+    <None Include="Properties\DataSources\MainApp.Reports.StatistikModelReport.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

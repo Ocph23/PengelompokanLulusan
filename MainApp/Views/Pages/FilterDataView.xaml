@@ -42,7 +42,7 @@
                     <StackPanel Style="{StaticResource formItem}">
                         <Label Style="{StaticResource formLabel}" Content="Program Studi"></Label>
                         <ComboBox  ItemsSource="{Binding SelectedFakultas.Children}" DisplayMemberPath="Name" SelectedValuePath="Id" 
-                                   SelectedValue="{Binding ProgdiId}">
+                                   SelectedValue="{Binding ProgdiId}" SelectedItem="{Binding SelectedProgdi}">
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Style="{StaticResource formItem}">

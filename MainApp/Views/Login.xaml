@@ -30,7 +30,7 @@
         <Grid Grid.Row="1">
             <StackPanel>
                 <StackPanel>
-                    <Label Margin="0,20,0,0" FontSize="20" Height="auto" Content="PENGELOMPOKAN PRESTASI SISWA AKADEMIK" HorizontalAlignment="Center"></Label>
+                    <Label Margin="0,20,0,0" FontSize="20" Height="auto" Content="PENGELOMPOKAN PRESTASI  AKADEMIK" HorizontalAlignment="Center"></Label>
                     <Label FontSize="20" Height="auto" Content="MAHASISWA FIKOM USTJ" HorizontalAlignment="Center"></Label>
                 </StackPanel>
                 <Border  Height="auto" Margin="50,20"  CornerRadius="10">

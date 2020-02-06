@@ -18,11 +18,10 @@
         </StackPanel>
         <StackPanel Grid.Row="1">
             <StackPanel Margin="50">
-                <Label Margin="0,20,0,0" FontSize="20" Height="auto" Content="PENGELOMPOKAN PRESTASI SISWA AKADEMIK" HorizontalAlignment="Center"></Label>
+                <Label Margin="0,20,0,0" FontSize="20" Height="auto" Content="PENGELOMPOKAN PRESTASI AKADEMIK" HorizontalAlignment="Center"></Label>
                 <Label FontSize="20" Height="auto" Content="MAHASISWA FIKOM USTJ" HorizontalAlignment="Center"></Label>
             </StackPanel>
             <Image Source="/MainApp;component/images/ustj.png" Width="200" Margin="50"/>
-           
         </StackPanel>
     </Grid>
 </Page>

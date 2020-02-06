@@ -68,7 +68,7 @@ namespace MainApp.Views.Pages
 
             var vm = form.DataContext as FilterDataViewModel;
             if(vm.Model!=null)
-                this.Navigation.Navigate(new KMeanAnalisView(vm.Model,Navigation));
+                this.Navigation.Navigate(new KMeanAnalisView(vm,Navigation));
         }
 
         private bool DeleteValidate(object obj)

@@ -47,4 +47,14 @@ namespace MainApp.Reports
 
 
     }
+
+
+    public class StatistikModelReport
+    {
+
+       public string Atribut { get; set; }
+       public string Nama { get; set; }
+        public int Jumlah { get; set; }
+        public int Cluster { get; internal set; }
+    }
 }

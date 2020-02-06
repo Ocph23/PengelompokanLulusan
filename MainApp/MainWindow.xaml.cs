@@ -72,7 +72,7 @@ namespace MainApp
                     form1.ShowDialog();
                     var vm = form1.DataContext as FilterDataViewModel;
                     if (vm.Model != null)
-                        MainFrame.Navigate(new KMeanAnalisView(vm.Model, MainFrame.NavigationService));
+                        MainFrame.Navigate(new KMeanAnalisView(vm, MainFrame.NavigationService));
                     break;
                 case "logout":
                     var form = new Views.Login();

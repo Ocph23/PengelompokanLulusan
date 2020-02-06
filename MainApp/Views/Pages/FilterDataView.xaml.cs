@@ -167,6 +167,17 @@ namespace MainApp.Views.Pages
             set { SetProperty(ref selectedFakultas ,value); DataSourceView.Refresh(); }
         }
 
+
+
+        private ProgramStudi progdi;
+
+        public ProgramStudi SelectedProgdi
+        {
+            get { return progdi; }
+            set { SetProperty(ref progdi, value); }
+        }
+
+
         public List<Mahasiswa> DataSource { get; set; } = new List<Mahasiswa>();
         public CollectionView DataSourceView { get; }
 

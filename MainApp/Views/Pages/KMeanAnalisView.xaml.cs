@@ -23,10 +23,10 @@ namespace MainApp.Views.Pages
     /// </summary>
     public partial class KMeanAnalisView : Page
     {
-        public KMeanAnalisView(List<DataAccess.Models.Mahasiswa> dataSource, NavigationService navigation)
+        public KMeanAnalisView(FilterDataViewModel model, NavigationService navigation)
         {
             InitializeComponent();
-            this.DataContext = new KMeanAnalisViewModel( dataSource,navigation);
+            this.DataContext = new KMeanAnalisViewModel( model,navigation);
         }
     }
 
@@ -34,6 +34,9 @@ namespace MainApp.Views.Pages
     public class KMeanAnalisViewModel:BaseNotify
     {
         public NavigationService Navigation { get; }
+
+        private FilterDataViewModel filterData;
+
         public CommandHandler AnalisaCommand { get; }
         public CommandHandler PrintPengelompokanCommand { get; }
         public CommandHandler PrintGrafikCommand { get; }
@@ -42,9 +45,10 @@ namespace MainApp.Views.Pages
         public CommandHandler BackCommand { get; }
         public List<Mahasiswa> Source { get; set; }
         private double[][] rawData = null;
-        public KMeanAnalisViewModel(List<Mahasiswa> dataSource, NavigationService navigation)
+        public KMeanAnalisViewModel(FilterDataViewModel data, NavigationService navigation)
         {
             this.Navigation = navigation;
+            filterData = data;
             AnalisaCommand = new CommandHandler { CanExecuteAction = AnalisaValidate, ExecuteAction = AnalisaActionAsync };
             PrintPengelompokanCommand = new CommandHandler { CanExecuteAction = CanPrint, ExecuteAction = PrintPengelompokanAction };
             PrintGrafikCommand = new CommandHandler { CanExecuteAction = CanPrint, ExecuteAction = PrintGrafikAction };
@@ -53,7 +57,7 @@ namespace MainApp.Views.Pages
             BackCommand = new CommandHandler { CanExecuteAction = x => true, ExecuteAction = x => Navigation.GoBack() };
             this.Source = new List<Mahasiswa>();
             int number = 1;
-            foreach (var item in dataSource)
+            foreach (var item in data.Model)
             {
                 item.OnChangeCentroid += Item_OnChangeCentroid;
                 item.Nomor = number;
@@ -69,7 +73,7 @@ namespace MainApp.Views.Pages
                 }
             }
             JumlahData = Source.Count;
-            MappingData(dataSource);
+            MappingData(data.Model);
         }
 
         private void PrintStatisticAction(object obj)
@@ -77,12 +81,98 @@ namespace MainApp.Views.Pages
             var centroidAwal = Source.Where(x => x.IsCentroid).ToList();
             var group = Source.GroupBy(x => x.Clustering);
             List<StatistikModel> dataSource = new List<StatistikModel>();
+            List<StatistikModelReport> dataSources = new List<StatistikModelReport>();
+
+            foreach (var item in group)
+            {
+                var key = item.Key;
+                var suku1 = new StatistikModelReport() { Cluster=key, Atribut = "Suku", Nama = "Asli Papua" };
+                suku1.Jumlah = item.Where(x => x.Suku == 1).Count();
+                dataSources.Add(suku1);
+
+                var suku2 = new StatistikModelReport() { Cluster = key, Atribut = "Suku", Nama = "Non Papua" };
+                suku2.Jumlah = item.Where(x => x.Suku == 2).Count();
+                dataSources.Add(suku2);
+
+
+                using (var db = new DbContext())
+                {
+                   var Jurusans = db.Jurusan.Select().ToList();
+                    foreach (var j in Jurusans)
+                    {
+                        var jurusan = new StatistikModelReport() { Cluster=key, Atribut = "Jurusan", Nama = j.Name };
+                        jurusan.Jumlah = item.Where(x => x.Jurusan.Id == j.Id).Count();
+                        dataSources.Add(jurusan);
+                    }
+                }
+
+                var I = "I";
+                for(var i =1;i<4;i++)
+                {
+                    var gel = new StatistikModelReport() { Cluster = key, Atribut = "Gelombang", Nama = I };
+                    gel.Jumlah = item.Where(x => x.Gelombang == i).Count();
+                    dataSources.Add(gel);
+                    I += "I";
+                }
+
+
+                var hasil1 = new StatistikModelReport() { Cluster = key, Atribut = "Hasil Test", Nama = "< 4" };
+                hasil1.Jumlah = item.Where(x => x.HasilTest < 4).Count();
+                dataSources.Add(hasil1);
+
+                var hasil2 = new StatistikModelReport() { Cluster = key, Atribut = "Hasil Test", Nama = "< 5" };
+                hasil2.Jumlah = item.Where(x => x.HasilTest >= 4 && x.HasilTest < 5).Count();
+                dataSources.Add(hasil2);
+
+                var hasil3 = new StatistikModelReport() { Cluster = key, Atribut = "Hasil Test", Nama = "< 6" };
+                hasil3.Jumlah = item.Where(x => x.HasilTest >= 5 && x.HasilTest < 6).Count();
+                dataSources.Add(hasil3);
+
+                var hasil4 = new StatistikModelReport() { Cluster = key, Atribut = "Hasil Test", Nama = "> 6" };
+                hasil4.Jumlah = item.Where(x => x.HasilTest >= 6).Count();
+                dataSources.Add(hasil4);
+
+
+                var ipk1 = new StatistikModelReport() { Cluster = key, Atribut = "IPK", Nama = "< 2.75" };
+                ipk1.Jumlah = item.Where(x => x.IPK < 2.75).Count();
+                dataSources.Add(ipk1);
+
+                var ipk2 = new StatistikModelReport() { Cluster = key, Atribut = "IPK", Nama = "< 3.50" };
+                ipk2.Jumlah = item.Where(x => x.IPK >= 2.75 && x.IPK < 3.50).Count();
+                dataSources.Add(ipk2);
+
+                var ipk3 = new StatistikModelReport() { Cluster = key, Atribut = "IPK", Nama = "> 3.50" };
+                ipk3.Jumlah = item.Where(x => x.IPK >= 3.50).Count();
+                dataSources.Add(ipk3);
+
+                      var masa1 = new StatistikModelReport() { Cluster = key, Atribut = "Masa Studi", Nama = "< 4" };
+                masa1.Jumlah = item.Where(x => x.MasaStudi < 4).Count();
+                dataSources.Add(masa1);
+
+                var masa2= new StatistikModelReport() { Cluster = key, Atribut = "Masa Studi", Nama = "< 5" };
+                masa2.Jumlah = item.Where(x => x.MasaStudi >= 4 && x.MasaStudi < 5).Count();
+                dataSources.Add(masa2);
+
+                var masa3 = new StatistikModelReport() { Cluster = key, Atribut = "Masa Studi", Nama = "> 6" };
+                masa3.Jumlah = item.Where(x => x.MasaStudi >= 5 && x.MasaStudi <6).Count();
+                dataSources.Add(masa3);
+
+                var masa4 = new StatistikModelReport() { Cluster = key, Atribut = "Masa Studi", Nama = "> 6" };
+                masa4.Jumlah = item.Where(x => x.MasaStudi >= 6).Count();
+                dataSources.Add(masa4);
+
+
+
+
+            }
+/*
+
             int n = 1;
             foreach (var item in centroidAwal)
             {
                 dataSource.Add(new StatistikModel
                 {
-                    Clustering = n,
+                    Clustering = item.Clustering,
                     Gelombang = item.GelombangModel.Nama,
                     HasilTest = group.Where(x=>x.Key ==item.Clustering).FirstOrDefault().Average(x=>x.HasilTest),
                     IPK = group.Where(x => x.Key == item.Clustering).FirstOrDefault().Average(x=>x.IPK),
@@ -93,12 +183,11 @@ namespace MainApp.Views.Pages
                     Jumlah = group.Where(x=>x.Key==item.Clustering).FirstOrDefault().Count()
                 });
                 n++;
-            }
+            }*/
 
-            HelperPrint.PrintPreviewWithFormAction("Judul", new ReportDataSource("DataSet1", dataSource),
-               "MainApp.Reports.StatistikLayout.rdlc", null);
+            HelperPrint.PrintPreviewWithFormAction("Judul", new ReportDataSource("DataSet1", dataSources),
+               "MainApp.Reports.StatistikReportLayout.rdlc", null);
         }
-
 
         private void PrintRekomendasiAction(object obj)
         {
@@ -123,8 +212,17 @@ namespace MainApp.Views.Pages
                 n++;
             }
 
+            var param1 = new ReportParameter { Name = "Fakultas" };
+            param1.Values.Add(filterData.SelectedFakultas.Name);
+
+            var param2 = new ReportParameter { Name = "Progdi" };
+            param2.Values.Add(filterData.SelectedProgdi.Name);
+
+
+            var dataParam = new ReportParameter[] {param1, param2 };
+
             HelperPrint.PrintPreviewWithFormAction("Judul", new ReportDataSource("DataSet1", dataSource.OrderByDescending(x=>x.Jumlah).ToList()),
-               "MainApp.Reports.RekomendasiLayout.rdlc", null);
+               "MainApp.Reports.RekomendasiLayout.rdlc",dataParam );
         }
 
         private void PrintPengelompokanAction(object obj)  
